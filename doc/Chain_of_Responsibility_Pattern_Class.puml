@@ -1,0 +1,131 @@
+@startuml
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml
+
+@startuml
+
+abstract class Handler
+
+Handler <|-- ConcreteHandler1
+
+Handler <|-- ConcreteHandler2
+
+
+Handler "0..1" o-- Handler
+
+Client ..|> Handler
+
+class Client {
+
+}
+
+
+
+abstract class Handler {
+successor:Handler
++handleRequest(String):void
+}
+
+class ConcreteHandler1{
++ handleRequest(String):void
+}
+
+class ConcreteHandler2{
++ handleRequest(String):void
+}
+
+@enduml
+
+@startuml
+
+abstract AbstractHandler {
+# nextHandler:AbstractHandler
++ handleRequest(AbstractRequest):void
+# getHandlerLevel():int
+# handle(AbstractRequest):void
+}
+
+class ConcreteHandler1{
++handleRequest(AbstractRequest):void
+#getHandlerLevel():int
+#handle(AbstractRequest):void
+}
+
+class ConcreteHandler2{
++handleRequest(AbstractRequest):void
+#getHandlerLevel():int
+#handle(AbstractRequest):void
+}
+
+class ConcreteHandler3{
+ +handleRequest(AbstractRequest):void
+ #getHandlerLevel():int
+ #handle(AbstractRequest):void
+ }
+
+ConcreteHandler1 --|> AbstractHandler
+ConcreteHandler2 --|> AbstractHandler
+ConcreteHandler3 --|> AbstractHandler
+
+AbstractHandler "0..1" o-- AbstractHandler
+
+abstract AbstractRequest{
+- obj:Object
++ AbstractRequest(Object)
++getContent():Object
++getRequestLevel():int
+}
+
+class ConcreteRequest1{
++AbstractRequest(Object)
++getContent():Object
++getRequestLevel():int
+}
+
+class ConcreteRequest2{
++AbstractRequest(Object)
++getContent():Object
++getRequestLevel():int
+}
+
+class ConcreteRequest3{
++AbstractRequest(Object)
++getContent():Object
++getRequestLevel():int
+}
+
+ConcreteRequest1 --|> AbstractRequest
+ConcreteRequest2 --|> AbstractRequest
+ConcreteRequest3 --|> AbstractRequest
+
+class Client {
+
+}
+
+Client --> AbstractRequest
+Client --> AbstractHandler
+@enduml
