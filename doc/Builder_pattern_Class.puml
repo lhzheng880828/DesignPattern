@@ -1,0 +1,33 @@
+@startuml
+
+abstract class Builder
+
+Builder --o Director
+Builder <|-- ConcreteBuilder
+ConcreteBuilder ..> Product:<<use>>
+
+class Product {
+
+}
+
+class ConcreteBuilder{
++ buildPartA():void
++ buildPartB():void
++ buildPartC():void
+}
+
+class Builder{
++ buildPartA():void
++ buildPartB():void
++ buildPartC():void
+}
+
+class Director{
++ construct()
+}
+
+
+
+
+@enduml
+
